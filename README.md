@@ -118,6 +118,12 @@ pydocstyle --ignore=D100,D200,D401,D212,D400,D406,D407,D413,D415,D205,D203,D202 
 - Add your code to the src/ folder
 - Adjust build.sh as needed
 
+**Alternates in `botcity-ci-cd.yaml`**:
+   - `botId`: Replace your-bot-id with your real BotCity bot ID
+   - `technology`: Define the language (e.g., python, javascript)
+   - `botPath`: Define the bot's file path
+   - `version`: DSpecify the desired bot version
+
 
 ### 🔧 Deployment Configuration
 
