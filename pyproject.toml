@@ -1,0 +1,19 @@
+[project]
+name = "rpa-actions-template"
+version = "0.1.0"
+description = "Template for RPA and creating BotCity automation projects with Python. Includes CI/CD pipelines with automated linting and integrated deployment to the BotCity platform."
+authors = [
+    {name = "Juan",email = "juan654.pablo@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "ruff (>=0.12.9,<0.13.0)",
+    "pydocstyle (>=6.3.0,<7.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

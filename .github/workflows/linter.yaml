@@ -1,0 +1,31 @@
+name: Code Review
+on: [push, pull_request]
+
+jobs: 
+  lint-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.9'
+          cache: "pip"
+
+      - name: installing ruff and pydocstyle python
+        run: pip install ruff pydocstyle
+
+      - name: liting simple ruff
+        run: ruff check .
+
+      - name: liting with RET group ruff
+        run: ruff check . --select RET --ignore RET504  
+
+      - name: liting with best pratices groups ruff
+        run: ruff check . --select ARG,C4,PD,ERA,SIM,N
+
+      - name: Check docstring
+        run: pydocstyle --ignore=D100,D200,D401,D212,D400,D406,D407,D413,D415,D205,D203,D202  .

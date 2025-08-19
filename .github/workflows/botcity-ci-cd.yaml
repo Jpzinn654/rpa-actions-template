@@ -1,0 +1,56 @@
+name: BotCity CI/CD - Update & Deploy
+
+on:
+  workflow_run:
+    workflows: ["Code Review"]
+    branches:
+      - botcity-dev
+      - main
+    types:
+      - completed
+
+jobs:
+  deploy-and-release:
+    name: Deploy and release in BotCity
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Get permission to build
+        run: chmod +x build.sh
+        
+      - name: Execute build
+        run: ./build.sh
+      
+      - name: Update in BotCity (botcity-dev)
+        if: github.event.workflow_run.head_branch == 'botcity-dev'
+        uses: botcity-dev/botcity-action-bots@v1.0.6
+        with:
+          deploy: false
+          update: true
+          release: true
+          version: "1.2.4-T"
+          botId: 'botcity-rpa-template'
+          technology: 'python'
+          botPath: './botcity-actions.zip'
+        env:
+          LOGIN: ${{ secrets.LOGIN }}
+          SERVER: ${{ secrets.SERVER }}
+          KEY: ${{ secrets.KEY }}
+      
+      - name: Deploy to BotCity (main)
+        if: github.event.workflow_run.head_branch == 'main'
+        uses: botcity-dev/botcity-action-bots@v1.0.6
+        with:
+          deploy: true
+          update: false
+          release: true
+          version: "1.2.4"
+          botId: 'botcity-rpa-template'
+          technology: 'python'
+          botPath: './botcity-actions.zip'
+        env:
+          LOGIN: ${{ secrets.LOGIN }}
+          SERVER: ${{ secrets.SERVER }}
+          KEY: ${{ secrets.KEY }}
