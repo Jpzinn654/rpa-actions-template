@@ -11,7 +11,8 @@ Official template for creating BotCity automation projects with Python. Includes
 
 - ✅ CI/CD pipeline integrated with GitHub Actions
 - ✅ Automated linting with Ruff and Pydocstyle
-- ✅ Automatic deployment to BotCity (optional)
+- ✅ Automatic deployment to BotCity
+- ✅ Automatic semantic versioning using GitHub tags 
 - ✅ Organized project structure
 - ✅ Semantic versioning configuration
 - ✅ Support for multiple environments (dev/prod)
@@ -88,6 +89,7 @@ For projects with automated deployment to BotCity.
     - All linting validations
     - Automatic deployment to botcity-dev branch
     - Versioned deployment to main branch
+    - Automatic semantic versioning using GitHub tags
     - Automatic releases
 
 ### 🚦 How to Use
